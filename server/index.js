@@ -9,20 +9,20 @@ const express = require("express"),
 app.use(json());
 app.use(cors());
 
-app.post("/charge", async (req, res) => {
-  console.log(req.body);
+app.post("/charge", (req, res) => {
+  console.log(+req.body.amount);
   // try {
   //   let { status } =
   // await
-  // stripe.charges
-  //   .create({
-  //     amount: 5000,
-  //     currency: "usd",
-  //     description: "An Example Charge",
-  //     source: req.body
-  //   })
-  //   .then(res => console.log(res))
-  //   .catch(err => console.log(err));
+  stripe.charges
+    .create({
+      amount: +req.body.amount,
+      currency: "usd",
+      description: "An Example Charge",
+      source: req.body.token
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   //   res.json({ status });
   // } catch (err) {
   //   res.status(500).json(err);

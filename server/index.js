@@ -11,9 +11,6 @@ app.use(cors());
 
 app.post("/charge", (req, res) => {
   console.log(+req.body.amount);
-  // try {
-  //   let { status } =
-  // await
   stripe.charges
     .create({
       amount: +req.body.amount,
@@ -23,10 +20,6 @@ app.post("/charge", (req, res) => {
     })
     .then(res => console.log(res))
     .catch(err => console.log(err));
-  //   res.json({ status });
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
 });
 
 app.listen(PORT, () => {
